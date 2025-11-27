@@ -241,3 +241,34 @@ button:focus-visible {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+/* ================================
+   FIX VISUAL iOS / Safari / Mobile
+   Forzar texto e íconos en negro
+   ================================ */
+
+/* Títulos de categorías (los links que ahora se ven azules) */
+.menu-category-pill span {
+  color: #000 !important;
+}
+
+/* Nombre de categoría ("Pizzas", "Empanadas", etc.) */
+.menu-category-pill .fw-semibold {
+  color: #000 !important;
+}
+
+/* Cantidad de productos */
+.menu-category-pill small {
+  color: #444 !important;
+}
+
+/* Icono + / - */
+.menu-cat-icon {
+  color: #000 !important;
+  border-color: #ccc !important;
+}
+
+/* Cuando la categoría está activa (rosa) */
+.menu-category-pill-active {
+  background-color: #ffe9e9 !important;
+}
