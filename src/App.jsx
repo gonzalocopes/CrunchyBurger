@@ -22,17 +22,12 @@ function App() {
   });
 
   const [showUpsell, setShowUpsell] = useState(false);
-
-  // 🔔 estado: local cerrado o abierto
   const [isClosed, setIsClosed] = useState(false);
-
-  // 🆕 último producto principal que disparó el upsell
   const [lastProduct, setLastProduct] = useState(null);
 
-  // productos que vamos a sugerir (bebidas y postres)
   const upsellItems = [...bebidas, ...postres];
 
-  // 🔔 lógica de horario: revisamos cada 1 minuto
+  // 🔔 Horario
   useEffect(() => {
     if (!clientConfig.horario?.enabled) return;
 
@@ -52,11 +47,9 @@ function App() {
       let closedNow;
 
       if (minutesClose > minutesOpen) {
-        // horario normal, mismo día (ej: 19:00–23:30)
         closedNow =
           minutesNow < minutesOpen || minutesNow >= minutesClose;
       } else {
-        // horario que cruza medianoche (ej: 20:00–02:00)
         closedNow =
           minutesNow < minutesOpen && minutesNow >= minutesClose;
       }
@@ -65,16 +58,13 @@ function App() {
     };
 
     checkClosed();
-    const id = setInterval(checkClosed, 60000); // cada 1 minuto
-
+    const id = setInterval(checkClosed, 60000);
     return () => clearInterval(id);
   }, []);
 
-  // cantidad total de items en el carrito (suma de qty)
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   const addToCart = (product, { fromUpsell = false } = {}) => {
-    // ⛔ si está cerrado, no dejamos agregar
     if (isClosed && clientConfig.horario?.enabled) {
       alert(
         clientConfig.horario.mensajeCerrado ||
@@ -93,7 +83,6 @@ function App() {
       return [...prev, { ...product, qty: 1 }];
     });
 
-    // 🔥 categorías principales que disparan el modal de sugerencias
     const mainCategories = [
       "Pizzas",
       "Hamburguesas",
@@ -107,8 +96,8 @@ function App() {
       mainCategories.includes(product.category) && !fromUpsell;
 
     if (shouldOpenUpsell) {
-      setLastProduct(product); // guardamos qué producto eligió
-      setShowUpsell(true); // abrimos el modal
+      setLastProduct(product);
+      setShowUpsell(true);
     }
   };
 
@@ -130,7 +119,6 @@ function App() {
     0
   );
 
-  // agregar desde el modal de upsell
   const handleAddFromUpsell = (product) => {
     addToCart(product, { fromUpsell: true });
   };
@@ -139,7 +127,6 @@ function App() {
     <div className="bg-body-tertiary min-vh-100">
       <Navbar cartCount={cartCount} />
 
-      {/* 🔔 Aviso de local cerrado */}
       {clientConfig.horario?.enabled && isClosed && (
         <div className="bg-dark text-light text-center py-2">
           <small>{clientConfig.horario.mensajeCerrado}</small>
@@ -148,8 +135,12 @@ function App() {
 
       <HeroCarousel />
 
-      {/* margen top para que no lo tape el navbar fijo */}
-      <main className="py-5" id="pedido" style={{ marginTop: "80px" }}>
+      {/* margen top + algo de espacio por la barra flotante */}
+      <main
+        className="py-5"
+        id="pedido"
+        style={{ marginTop: "0px", paddingBottom: "60px" }}
+      >
         <div className="container-fluid px-4 px-lg-5">
           <div className="row">
             {/* Menú */}
@@ -157,7 +148,7 @@ function App() {
               <Menu onAddToCart={addToCart} isClosed={isClosed} />
             </div>
 
-            {/* Carrito + datos + botón WhatsApp */}
+            {/* Carrito + datos + botón verde WhatsApp */}
             <section id="cart" className="col-12 col-lg-5">
               <Cart
                 cart={cart}
@@ -165,7 +156,10 @@ function App() {
                 onRemove={removeFromCart}
                 onChangeQty={changeQty}
               />
-              <CheckoutForm customer={customer} onChange={setCustomer} />
+              <CheckoutForm
+                customer={customer}
+                onChange={setCustomer}
+              />
               <WhatsAppButton
                 cart={cart}
                 total={total}
@@ -177,6 +171,7 @@ function App() {
         </div>
       </main>
 
+      {/* Footer normal */}
       <footer className="bg-dark text-light text-center py-3 mt-auto">
         <small>
           © {new Date().getFullYear()}{" "}
@@ -192,13 +187,16 @@ function App() {
         </small>
       </footer>
 
+      {/* 🧱 Separador solo mobile para que la barra roja no tape el footer */}
+      <div className="d-md-none" style={{ height: "64px" }} />
+
       {/* Modal de sugerencias */}
       <UpsellModal
         show={showUpsell}
         onClose={() => setShowUpsell(false)}
         upsellItems={upsellItems}
         onAdd={handleAddFromUpsell}
-        lastProduct={lastProduct} // 🆕 le pasamos el último producto
+        lastProduct={lastProduct}
       />
     </div>
   );

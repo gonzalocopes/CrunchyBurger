@@ -66,3 +66,136 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+/* Barra flotante de WhatsApp en mobile */
+.floating-wpp {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  padding: 0.75rem 1rem;
+}
+
+/* En pantallas grandes no hace falta mostrarla (ya está el botón grande) */
+@media (min-width: 992px) {
+  .floating-wpp {
+    display: none !important;
+  }
+}
+
+
+/* === Menú estilo app de pedidos === */
+.menu-category-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* “pastillas” de categoría en mobile */
+.menu-category-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  font-size: 0.9rem;
+  transition: background-color 0.15s ease, transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.menu-category-pill:active {
+  transform: scale(0.98);
+}
+
+.menu-category-pill-active {
+  background-color: #ffeded;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* circulito con inicial de la categoría */
+.menu-cat-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ff4b4b;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* icono + / - */
+.menu-cat-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+/* tarjetas de producto dentro de cada categoría */
+.menu-product-card {
+  border: none;
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .menu-product-card {
+    border-radius: 10px;
+  }
+}
+
+/* Animación del despliegue de productos en mobile */
+.menu-category-collapse {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+.menu-category-collapse.show {
+  max-height: 1000px; /* suficiente para varias cards */
+  opacity: 1;
+}
+
+/* (Si ya tenías estas clases, podés fusionar estilos) */
+.menu-category-pill {
+  width: 100%;
+  border: none;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.menu-category-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.menu-category-pill-active {
+  background: #ffe1e1;
+}
+
+.menu-cat-icon {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
