@@ -23,15 +23,15 @@ export default function Menu({ onAddToCart, isClosed }) {
 
       // solo hacemos scroll en mobile y si la estamos abriendo
       if (next && typeof window !== "undefined" && window.innerWidth < 768) {
+        // esperamos a que termine la animación de abrir/cerrar
         setTimeout(() => {
           const el = categoryRefs.current[next];
           if (el) {
-            const rect = el.getBoundingClientRect();
-            // ajustá este offset si querés que quede más arriba/abajo
-            const offset = window.scrollY + rect.top - 140;
+            // posición absoluta del contenedor en la página
+            const offset = el.offsetTop - 120; // ajustá 120 si querés más arriba/abajo
             window.scrollTo({ top: offset, behavior: "smooth" });
           }
-        }, 80);
+        }, 350); // tiempo para que se acomode el layout
       }
 
       return next;
@@ -121,7 +121,11 @@ export default function Menu({ onAddToCart, isClosed }) {
           const isOpenMobile = openCategory === cat.id;
 
           return (
-            <div key={cat.id} className="mb-4">
+            <div
+              key={cat.id}
+              className="mb-4"
+              ref={(el) => (categoryRefs.current[cat.id] = el)} // ref en el contenedor de la categoría
+            >
               {/* Título de categoría (solo desktop) */}
               <div className="d-none d-md-flex align-items-baseline mb-2">
                 <h4 className="me-2 mb-0">{cat.label}</h4>
@@ -133,7 +137,6 @@ export default function Menu({ onAddToCart, isClosed }) {
 
               {/* MOBILE: contenedor con animación de apertura/cierre */}
               <div
-                ref={(el) => (categoryRefs.current[cat.id] = el)}
                 className={`d-md-none menu-category-collapse ${
                   isOpenMobile ? "show" : ""
                 }`}
