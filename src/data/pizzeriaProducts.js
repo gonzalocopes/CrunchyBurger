@@ -134,6 +134,17 @@ export const postres = [
 // Extras para pizzas
 export const extrasPizza = [
   {
+    id: "al-molde",
+    name: "Al Molde 🍕🟫",
+    price: 0,
+    category: "Extras",
+  },{
+    id: "ala-piedra",
+    name: "A la Piedra 🔥🍕",
+    price: 0,
+    category: "Extras",
+  },
+  {
     id: "extra-queso",
     name: "Extra queso 🧀",
     price: 800,

@@ -4,7 +4,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
   const buildMessage = () => {
     const lines = [];
 
-    lines.push("📦 Nuevo pedido desde la web:");
+    lines.push("📦 Nuevo pedido:");
     lines.push("");
     lines.push("🍕 Detalle del pedido:");
     cart.forEach((item) => {
