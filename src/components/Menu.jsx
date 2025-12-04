@@ -1,13 +1,13 @@
 // src/components/Menu.jsx
 import { useState, useRef } from "react";
-import { pizzas, empanadas, bebidas, postres } from "../data/pizzeriaProducts";
+import { hamburguesas, papas, bebidas, postres } from "../data/pizzeriaProducts";
 
 export default function Menu({ onAddToCart, isClosed }) {
   const categories = [
-    { id: "pizzas", label: "Pizzas 🍕", products: pizzas },
-    { id: "empanadas", label: "Empanadas 🥟", products: empanadas },
+    { id: "hamburguesas", label: "Hamburguesas 🍔", products: hamburguesas },
+    { id: "papas", label: "Papas y acompañamientos 🍟", products: papas },
     { id: "bebidas", label: "Bebidas 🥤", products: bebidas },
-    { id: "postres", label: "Postres 🍦", products: postres },
+    { id: "postres", label: "Postres 🍨", products: postres },
   ];
 
   // categoría abierta en MOBILE

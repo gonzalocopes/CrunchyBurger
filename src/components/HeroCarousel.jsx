@@ -13,12 +13,12 @@ export default function HeroCarousel() {
   const slide1Title = hero?.slides?.[0]?.titulo || `${nombre} 🍕`;
   const slide1Subtitle =
     hero?.slides?.[0]?.subtitulo ||
-    "Pedí tus pizzas favoritas y mandá el pedido por WhatsApp.";
+    "Pedí tus hamburgesas favoritas y mandá el pedido por WhatsApp.";
 
-  const slide2Title = hero?.slides?.[1]?.titulo || "Horno a la piedra";
+  const slide2Title = hero?.slides?.[1]?.titulo || "Hamburgesas que si llenan";
   const slide2Subtitle =
     hero?.slides?.[1]?.subtitulo ||
-    "Masa casera, ingredientes frescos, sabor brutal.";
+    "Las mejores hamburgesas de zona sur.";
 
   const slide3Title = hero?.slides?.[2]?.titulo || "Promos todos los días";
   const slide3Subtitle =

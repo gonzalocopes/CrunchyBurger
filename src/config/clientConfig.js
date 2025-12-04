@@ -1,20 +1,20 @@
 // src/config/clientConfig.js
 export const clientConfig = {
-  nombre: "Pizzería Don Pepe",          // Nombre del local
-  tipo: "pizzeria",                     // pizzeria | hamburgueseria | heladeria | etc.
+  nombre: "Hamburguesería",          // Nombre del local
+  tipo: "hamburgueseria",                     // pizzeria | hamburgueseria | heladeria | etc.
 
   whatsapp: "+5491162123307",           // Teléfono del negocio (formato internacional)
 
-  logo: "/images/logopizza.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
+  logo: "/images/logoburga.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
 
   colores: {
-    primario: "#e63946",
-    secundario: "#1d3557",
+    primario: "#f97316",   // naranja
+    secundario: "#111827", // gris muy oscuro
     textoClaro: "#ffffff",
   },
 
   hero: {
-    fondo: "/images/fondopizza.png",   // Imagen de fondo (ponela en /public/images/)
+    fondo: "/images/fondoburga.jpg",   // Imagen de fondo (ponela en /public/images/)
   },
   // 🔔 NUEVO: configuración de horario
   //horario: {
