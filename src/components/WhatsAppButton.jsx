@@ -21,9 +21,9 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     // Extras de pizzas (categoría Extras)
     const pizzaExtras = cart.filter((item) => item.category === "Extras");
 
-    lines.push("📦 Nuevo pedido:");
+    lines.push("🍔 Nuevo pedido:");
     lines.push("");
-    lines.push("🍕 Detalle del pedido:");
+    lines.push("🍔 Detalle del pedido:");
 
     // Productos normales (sin sabores de pack ni extras)
     cart.forEach((item) => {
@@ -61,7 +61,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     // ➕ Detalle de agregados para pizzas
     if (pizzaExtras.length > 0) {
       lines.push("");
-      lines.push("➕ Agregados para pizzas:");
+      lines.push("➕ Adicionales:");
       pizzaExtras.forEach((item) => {
         lines.push(`- ${item.qty}x ${item.name} ($${item.price} c/u)`);
       });
