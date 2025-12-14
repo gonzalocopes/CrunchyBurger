@@ -49,9 +49,12 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     lines.push(`Entre calles: ${customer.address2 || "-"}`);
     lines.push(`Teléfono: ${customer.phone || "-"}`);
     lines.push(`Entrega: ${customer.deliveryMethod || "-"}`);
-    lines.push(`Pago: ${customer.paymentMethod || "-"}`);
-    if (customer.paymentMethod === "Efectivo" && customer.payWith) {
-      lines.push(`Abona con: ${customer.payWith}`);
+
+    if (customer.deliveryMethod === "Delivery") {
+      lines.push(`Pago: ${customer.paymentMethod || "-"}`);
+      if (customer.paymentMethod === "Efectivo" && customer.payWith) {
+        lines.push(`Abona con: ${customer.payWith}`);
+      }
     }
 
     if (customer.comments) {

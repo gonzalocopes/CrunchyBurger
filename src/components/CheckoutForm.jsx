@@ -81,34 +81,38 @@ export default function CheckoutForm({ customer, onChange }) {
           />
         </div>
 
-        {/* 5. Medio de pago */}
-        <div className="mb-3">
-          <label className="form-label fw-bold">Medio de pago</label>
-          <select
-            className="form-select"
-            name="paymentMethod"
-            value={customer.paymentMethod}
-            onChange={handleChange}
-          >
-            <option value="Efectivo">Efectivo</option>
-            <option value="Transferencia">Transferencia</option>
-            <option value="Mercado Pago">Mercado Pago</option>
-          </select>
-        </div>
+        {/* 5. Medio de pago (Solo para Delivery) */}
+        {customer.deliveryMethod === "Delivery" && (
+          <>
+            <div className="mb-3">
+              <label className="form-label fw-bold">Medio de pago</label>
+              <select
+                className="form-select"
+                name="paymentMethod"
+                value={customer.paymentMethod}
+                onChange={handleChange}
+              >
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Mercado Pago">Mercado Pago</option>
+              </select>
+            </div>
 
-        {/* 5.1 ¿Con cuánto paga? (Solo si es Efectivo) */}
-        {customer.paymentMethod === "Efectivo" && (
-          <div className="mb-3">
-            <label className="form-label">¿Con cuánto abonás?</label>
-            <input
-              type="text"
-              className="form-control"
-              name="payWith"
-              value={customer.payWith || ""}
-              onChange={handleChange}
-              placeholder="Ej: $20.000 / Pago justo"
-            />
-          </div>
+            {/* 5.1 ¿Con cuánto paga? (Solo si es Efectivo) */}
+            {customer.paymentMethod === "Efectivo" && (
+              <div className="mb-3">
+                <label className="form-label">¿Con cuánto abonás?</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="payWith"
+                  value={customer.payWith || ""}
+                  onChange={handleChange}
+                  placeholder="Ej: $20.000 / Pago justo"
+                />
+              </div>
+            )}
+          </>
         )}
 
         {/* 6. Comentarios */}
