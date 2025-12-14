@@ -6,16 +6,71 @@ export default function UpsellModal({
   onClose,
   upsellItems,
   onAdd,
-  onRemoveOne, // queda por compatibilidad, aunque acá no lo usamos
   lastProduct,
+  onUpdateItem, // Función para actualizar el producto (exclusions)
 }) {
-  const [addedIds, setAddedIds] = useState([]); // para evitar agregar el mismo extra dos veces
+  const [addedIds, setAddedIds] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
 
+  // Detectamos ingredientes cada vez que cambia el producto
   useEffect(() => {
-    if (show) {
-      setAddedIds([]);
+    if (show && lastProduct?.description) {
+      // 1. Limpiamos la frase de las papas (si existe) y punto final
+      let cleanDesc = lastProduct.description
+        .replace(/Incluye papas fritas\.?/i, "")
+        .replace(/\.$/, ""); // sacar punto final
+
+      // 2. Separamos por comas
+      let rawParts = cleanDesc.split(",");
+
+      // 3. Procesamos " y " en cada parte (ej: "Panceta y Cebolla")
+      let finalIngredients = [];
+      rawParts.forEach((part) => {
+        if (part.includes(" y ")) {
+          const subParts = part.split(" y ");
+          finalIngredients.push(...subParts);
+        } else {
+          finalIngredients.push(part);
+        }
+      });
+
+      // 4. Limpieza final de espacios y capitalización
+      finalIngredients = finalIngredients
+        .map((i) => i.trim())
+        .filter((i) => i.length > 0 && i.toLowerCase() !== "pan de papa"); // Opcional: filtrar el pan si no es removible
+
+      // Mapeamos a objetos con estado "checked" (inicialmente true)
+      // Usamos el nombre original, pero chequeamos si ya estaba excluido en lastProduct.exclusions
+      const currentExclusions = lastProduct.exclusions || [];
+      
+      setIngredients(
+        finalIngredients.map((ing) => ({
+          name: ing,
+          checked: !currentExclusions.includes(ing),
+        }))
+      );
+
+      setAddedIds([]); // Reseteamos extras agregados
     }
-  }, [show]);
+  }, [show, lastProduct]);
+
+  // Manejo de checkboxes de ingredientes
+  const handleToggleIngredient = (ingName) => {
+    const newIngredients = ingredients.map((ing) =>
+      ing.name === ingName ? { ...ing, checked: !ing.checked } : ing
+    );
+    setIngredients(newIngredients);
+
+    // Calculamos la lista de EXCLUSIONES (los unchecked)
+    const exclusions = newIngredients
+      .filter((ing) => !ing.checked)
+      .map((ing) => ing.name);
+
+    // Actualizamos el producto padre en el carrito
+    if (lastProduct?.uuid && onUpdateItem) {
+      onUpdateItem(lastProduct.uuid, { exclusions });
+    }
+  };
 
   if (!show) return null;
 
@@ -25,7 +80,7 @@ export default function UpsellModal({
 
   const icon = isHamburguesa ? "🍔" : "🍽️";
   const title = isHamburguesa
-    ? `¿Le sumamos algo a tu hamburguesa? ${icon}`
+    ? `Personalizá tu Hamburguesa ${icon}`
     : `¿Le sumamos algo a tu pedido? ${icon}`;
 
   const itemsToShow = upsellItems || [];
@@ -39,8 +94,8 @@ export default function UpsellModal({
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           {/* HEADER */}
-          <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
+          <div className="modal-header bg-warning">
+            <h5 className="modal-title text-dark fw-bold">{title}</h5>
             <button
               type="button"
               className="btn-close"
@@ -52,12 +107,45 @@ export default function UpsellModal({
           {/* BODY */}
           <div className="modal-body upsell-scroll-area">
             <p className="small text-muted mb-3">
-              Estás armando <strong>{productName}</strong>.  
-              Te dejamos algunos adicionales para acompañar:
+              Estás armando <strong>{productName}</strong>.
             </p>
 
+            {/* SECCIÓN DE INGREDIENTES (Solo si hay detectados) */}
+            {ingredients.length > 0 && (
+              <div className="mb-4">
+                <h6 className="fw-bold mb-2">Ingredientes:</h6>
+                <div className="card p-2 bg-light border-0">
+                  {ingredients.map((ing, idx) => (
+                    <div className="form-check" key={idx}>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={ing.checked}
+                        onChange={() => handleToggleIngredient(ing.name)}
+                        id={`ing-${idx}`}
+                      />
+                      <label
+                        className={`form-check-label ${
+                          !ing.checked ? "text-decoration-line-through text-danger" : ""
+                        }`}
+                        htmlFor={`ing-${idx}`}
+                      >
+                        {ing.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <small className="text-muted d-block mt-1">
+                  Desmarcá lo que NO quieras incluír.
+                </small>
+              </div>
+            )}
+
+            <hr />
+
+            <h6 className="fw-bold mb-2">¿Querés agregar algo más?</h6>
             {itemsToShow.length === 0 ? (
-              <p>No hay productos sugeridos.</p>
+              <p>No hay extras disponibles.</p>
             ) : (
               <ul className="list-group">
                 {itemsToShow.map((item) => {
@@ -71,9 +159,7 @@ export default function UpsellModal({
                       <div>
                         <div className="fw-semibold">{item.name}</div>
                         <small className="text-muted">
-                          +${item.price.toLocaleString("es-AR", {
-                            minimumFractionDigits: 0,
-                          })}
+                          +${item.price.toLocaleString("es-AR")}
                         </small>
                       </div>
                       <button
@@ -102,10 +188,10 @@ export default function UpsellModal({
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-warning w-100 fw-bold"
               onClick={onClose}
             >
-              Seguir
+              Confirmar y Cerrar
             </button>
           </div>
         </div>

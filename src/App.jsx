@@ -148,11 +148,18 @@ function App() {
     return sum + (itemTotal + extrasTotal * item.qty);
   }, 0);
 
+  // Permite actualizar propiedades de un ítem (ej: exclusiones)
+  const updateCartItem = (uuid, changes) => {
+    setCart((prev) =>
+      prev.map((item) => (item.uuid === uuid ? { ...item, ...changes } : item))
+    );
+  };
+
   const handleAddFromUpsell = (product) => {
     if (lastProduct?.uuid) {
       addExtraToItem(lastProduct.uuid, product);
     } else {
-      // Fallback por si no hay padre (no debería pasar con la lógica nueva)
+      // Fallback
       addToCart(product, { fromUpsell: true });
     }
   };
@@ -231,6 +238,7 @@ function App() {
         upsellItems={upsellItems}
         onAdd={handleAddFromUpsell}
         lastProduct={lastProduct}
+        onUpdateItem={updateCartItem}
       />
     </div>
   );

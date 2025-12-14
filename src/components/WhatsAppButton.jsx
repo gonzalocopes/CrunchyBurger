@@ -38,6 +38,13 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
           lines.push(`  + ${extra.name} ($${extra.price})`);
         });
       }
+
+      // Exclusiones (Ingredientes quitados)
+      if (item.exclusions && item.exclusions.length > 0) {
+        item.exclusions.forEach((ex) => {
+          lines.push(`  - SIN ${ex}`);
+        });
+      }
     });
 
     lines.push("");

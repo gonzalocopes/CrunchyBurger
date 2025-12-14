@@ -20,6 +20,15 @@ export default function Cart({ cart, total, onRemove, onChangeQty }) {
                     <small className="text-muted d-block">
                       ${item.price}
                     </small>
+
+                    {/* Exclusiones (Ingredientes quitados) */}
+                    {item.exclusions && item.exclusions.length > 0 && (
+                      <div className="text-danger small mt-1">
+                        {item.exclusions.map((ex, i) => (
+                          <div key={i}>🚫 Sin {ex}</div>
+                        ))}
+                      </div>
+                    )}
                     
                     {/* Renderizamos los extras si existen */}
                     {item.extras && item.extras.length > 0 && (
