@@ -1,6 +1,6 @@
 // src/config/clientConfig.js
 export const clientConfig = {
-  nombre: "Hamburguesería",          // Nombre del local
+  nombre: "CRUNCHY BURGER",          // Nombre del local
   tipo: "hamburgueseria",                     // pizzeria | hamburgueseria | heladeria | etc.
 
   whatsapp: "+5491136424020",           // Teléfono del negocio (formato internacional)
@@ -15,6 +15,24 @@ export const clientConfig = {
 
   hero: {
     fondo: "/images/fondoburga.jpg",   // Imagen de fondo (ponela en /public/images/)
+    slides: [
+      {
+        titulo: "CRUNCHY BURGER",
+        subtitulo: "Condena al éxito desde la primera mordida.",
+      },
+      {
+        titulo: "Horarios",
+        subtitulo: "Miércoles a Domingo desde las 19hs.",
+      },
+      {
+        titulo: "Encontranos",
+        subtitulo: "Av. Hipólito Yrigoyen 14687, Burzaco.",
+      },
+      {
+        titulo: "Promos todos los días",
+        subtitulo: "2x1, combos individuales, familiares y mucho más.",
+      },
+    ],
   },
   // 🔔 NUEVO: configuración de horario
   //horario: {

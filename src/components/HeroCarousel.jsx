@@ -43,9 +43,9 @@ export default function HeroCarousel() {
                 style={{ maxHeight: "520px", objectFit: "cover" }}
               />
               <div className="carousel-caption d-block">
-                <div className="bg-dark bg-opacity-50 rounded-3 px-3 py-2 d-inline-block">
-                  <h2 className="fw-bold text-shadow fs-4">{slide1Title}</h2>
-                  <p className="mb-0 small">{slide1Subtitle}</p>
+                <div className="hero-caption-glass">
+                  <h2 className="hero-title">{slide1Title}</h2>
+                  <p className="hero-subtitle">{slide1Subtitle}</p>
                 </div>
               </div>
             </div>
@@ -59,9 +59,9 @@ export default function HeroCarousel() {
                 style={{ maxHeight: "520px", objectFit: "cover" }}
               />
               <div className="carousel-caption d-block">
-                <div className="bg-dark bg-opacity-50 rounded-3 px-3 py-2 d-inline-block">
-                  <h2 className="fw-bold text-shadow fs-4">{slide2Title}</h2>
-                  <p className="mb-0 small">{slide2Subtitle}</p>
+                <div className="hero-caption-glass">
+                  <h2 className="hero-title">{slide2Title}</h2>
+                  <p className="hero-subtitle">{slide2Subtitle}</p>
                 </div>
               </div>
             </div>
@@ -75,9 +75,9 @@ export default function HeroCarousel() {
                 style={{ maxHeight: "520px", objectFit: "cover" }}
               />
               <div className="carousel-caption d-block">
-                <div className="bg-dark bg-opacity-50 rounded-3 px-3 py-2 d-inline-block">
-                  <h2 className="fw-bold text-shadow fs-4">{slide3Title}</h2>
-                  <p className="mb-0 small">{slide3Subtitle}</p>
+                <div className="hero-caption-glass">
+                  <h2 className="hero-title">{slide3Title}</h2>
+                  <p className="hero-subtitle">{slide3Subtitle}</p>
                 </div>
               </div>
             </div>
