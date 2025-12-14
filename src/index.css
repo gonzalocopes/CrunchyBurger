@@ -24,6 +24,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding-top: 0px; /* El App.jsx maneja el padding top o el main */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -241,6 +242,16 @@ button:focus-visible {
 
 .menu-category-strip {
   gap: 0.75rem;
+  position: sticky;
+  top: 70px; /* Debajo del navbar fijo */
+  z-index: 1020;
+  padding-top: 10px;
+  background-color: #f8f9fa; /* Fondo para que no sea transparente al stickear */
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 10px;
 }
 
 /* Pastilla premium */
@@ -321,9 +332,9 @@ button:focus-visible {
 /* AJUSTE SOLO PARA CELULAR */
 @media (max-width: 768px) {
   .carousel-item img {
-    height: 320px !important;     /* más bajo para que no quede tan "alta" la imagen */
+    height: 240px !important;     /* Altura reducida para mobile */
     object-fit: cover !important;
-    object-position: center 40% !important; /* 📌 mueve el recorte hacia abajo */
+    object-position: center 60% !important; /* Enfocar más abajo */
   }
 }
 

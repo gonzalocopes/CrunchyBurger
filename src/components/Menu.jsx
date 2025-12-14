@@ -1,11 +1,12 @@
 // src/components/Menu.jsx
 import { useState, useRef } from "react";
-import { hamburguesas, papas, bebidas, postres } from "../data/pizzeriaProducts";
+import { hamburguesas, papas, combos, bebidas, postres } from "../data/products";
 
 export default function Menu({ onAddToCart, isClosed }) {
   const categories = [
     { id: "hamburguesas", label: "Hamburguesas 🍔", products: hamburguesas },
-    { id: "papas", label: "Papas y acompañamientos 🍟", products: papas },
+    { id: "papas", label: "Papas y Acompañamientos 🍟", products: papas },
+    { id: "combos", label: "Combos y Baldes 🍗", products: combos },
     { id: "bebidas", label: "Bebidas 🥤", products: bebidas },
     { id: "postres", label: "Postres 🍨", products: postres },
   ];

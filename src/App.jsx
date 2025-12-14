@@ -7,8 +7,8 @@ import Cart from "./components/Cart";
 import CheckoutForm from "./components/CheckoutForm";
 import WhatsAppButton from "./components/WhatsAppButton";
 import UpsellModal from "./components/UpsellModal";
-// 👉 Usamos solo extrasPizza para el upsell
-import { extrasPizza } from "./data/pizzeriaProducts";
+// 👉 Usamos solo extras para el upsell
+import { extras } from "./data/products";
 
 import { clientConfig } from "./config/clientConfig";
 
@@ -28,8 +28,8 @@ function App() {
   const [isClosed, setIsClosed] = useState(false);
   const [lastProduct, setLastProduct] = useState(null);
 
-  // ⬇️ Ahora las sugerencias del modal son los extras de pizza
-  const upsellItems = extrasPizza;
+  // ⬇️ Ahora las sugerencias del modal son los extras
+  const upsellItems = extras;
 
   // 🔔 Horario
   useEffect(() => {
@@ -88,12 +88,11 @@ function App() {
     });
 
     const mainCategories = [
-      "Pizzas",
       "Hamburguesas",
-      "Sándwiches",
-      "Sandwiches",
-      "Milanesas",
+      "Papas",
       "Combos",
+      "Bebidas",
+      "Postres",
     ];
 
       const shouldOpenUpsell =
@@ -143,7 +142,7 @@ function App() {
 
       {/* margen top + algo de espacio por la barra flotante */}
       <main
-        className="py-5"
+        className="py-3 py-lg-5"
         id="pedido"
         style={{ marginTop: "0px", paddingBottom: "60px" }}
       >
