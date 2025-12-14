@@ -37,7 +37,17 @@ export default function UpsellModal({
       // 4. Limpieza final de espacios y capitalización
       finalIngredients = finalIngredients
         .map((i) => i.trim())
-        .filter((i) => i.length > 0 && i.toLowerCase() !== "pan de papa"); // Opcional: filtrar el pan si no es removible
+        .map((i) => i.trim())
+        .filter((i) => {
+          if (i.length === 0) return false;
+          const lower = i.toLowerCase();
+          // Excluir Pan y Medallones (la carne no suele quitarse así nomás)
+          if (lower.includes("pan de papa")) return false;
+          if (lower.includes("medallón")) return false;
+          if (lower.includes("doble medallón")) return false;
+          if (lower.includes("triple medallón")) return false;
+          return true;
+        });
 
       // Mapeamos a objetos con estado "checked" (inicialmente true)
       // Usamos el nombre original, pero chequeamos si ya estaba excluido en lastProduct.exclusions
