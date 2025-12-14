@@ -317,7 +317,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella personal.",
     price: 2000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/aquarius_500.png",
   },
   {
     id: "coca-500",
