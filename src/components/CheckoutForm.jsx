@@ -13,7 +13,21 @@ export default function CheckoutForm({ customer, onChange }) {
 
       <div className="card-body">
 
-        {/* Nombre */}
+        {/* 1. Entrega (Primero, para definir qué campos mostrar) */}
+        <div className="mb-3">
+          <label className="form-label fw-bold">Entrega</label>
+          <select
+            className="form-select"
+            name="deliveryMethod"
+            value={customer.deliveryMethod}
+            onChange={handleChange}
+          >
+            <option value="Delivery">Delivery (Envío a domicilio)</option>
+            <option value="Retiro en local">Retiro en local</option>
+          </select>
+        </div>
+
+        {/* 2. Nombre (Siempre obligatorio) */}
         <div className="mb-3">
           <label className="form-label">Nombre</label>
           <input
@@ -26,31 +40,35 @@ export default function CheckoutForm({ customer, onChange }) {
           />
         </div>
 
-        {/* Dirección */}
-        <div className="mb-3">
-          <label className="form-label">Dirección y Numeracion (si es delivery)</label>
-          <input
-            type="text"
-            className="form-control"
-            name="address"
-            value={customer.address}
-            onChange={handleChange}
-            placeholder="Calle, número"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Entre calles (si es delivery)</label>
-          <input
-            type="text"
-            className="form-control"
-            name="address2"
-            value={customer.address2}
-            onChange={handleChange}
-            placeholder="Entre calles"
-          />
-        </div>
+        {/* 3. Dirección y Entre calles (Solo si es Delivery) */}
+        {customer.deliveryMethod === "Delivery" && (
+          <>
+            <div className="mb-3">
+              <label className="form-label">Dirección y Numeración</label>
+              <input
+                type="text"
+                className="form-control"
+                name="address"
+                value={customer.address}
+                onChange={handleChange}
+                placeholder="Calle y altura"
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Entre calles</label>
+              <input
+                type="text"
+                className="form-control"
+                name="address2"
+                value={customer.address2}
+                onChange={handleChange}
+                placeholder="Ej: Av. San Martín y Belgrano"
+              />
+            </div>
+          </>
+        )}
 
-        {/* Teléfono */}
+        {/* 4. Teléfono (Siempre visible) */}
         <div className="mb-3">
           <label className="form-label">Teléfono</label>
           <input
@@ -63,23 +81,9 @@ export default function CheckoutForm({ customer, onChange }) {
           />
         </div>
 
-        {/* Entrega */}
+        {/* 5. Medio de pago */}
         <div className="mb-3">
-          <label className="form-label">Entrega</label>
-          <select
-            className="form-select"
-            name="deliveryMethod"
-            value={customer.deliveryMethod}
-            onChange={handleChange}
-          >
-            <option value="Delivery">Delivery</option>
-            <option value="Retiro en local">Retiro en local</option>
-          </select>
-        </div>
-
-        {/* Medio de pago */}
-        <div className="mb-3">
-          <label className="form-label">Medio de pago</label>
+          <label className="form-label fw-bold">Medio de pago</label>
           <select
             className="form-select"
             name="paymentMethod"
@@ -92,14 +96,29 @@ export default function CheckoutForm({ customer, onChange }) {
           </select>
         </div>
 
-        {/* 🆕 Comentarios */}
+        {/* 5.1 ¿Con cuánto paga? (Solo si es Efectivo) */}
+        {customer.paymentMethod === "Efectivo" && (
+          <div className="mb-3">
+            <label className="form-label">¿Con cuánto abonás?</label>
+            <input
+              type="text"
+              className="form-control"
+              name="payWith"
+              value={customer.payWith || ""}
+              onChange={handleChange}
+              placeholder="Ej: $20.000 / Pago justo"
+            />
+          </div>
+        )}
+
+        {/* 6. Comentarios */}
         <div className="mb-3">
           <label className="form-label">Comentarios (opcional)</label>
           <textarea
             className="form-control"
             name="comments"
-            rows="3"
-            placeholder="Ej: Pago justo, sin cebolla, etc..."
+            rows="2"
+            placeholder="Ej: Sin cebolla, mayonesa aparte..."
             value={customer.comments}
             onChange={handleChange}
           ></textarea>

@@ -21,6 +21,7 @@ function App() {
     phone: "",
     deliveryMethod: "Delivery",
     paymentMethod: "Efectivo",
+    payWith: "", // Para indicar con cuánto paga si es efectivo
     comments: "",
   });
 

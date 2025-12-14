@@ -50,6 +50,10 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     lines.push(`Teléfono: ${customer.phone || "-"}`);
     lines.push(`Entrega: ${customer.deliveryMethod || "-"}`);
     lines.push(`Pago: ${customer.paymentMethod || "-"}`);
+    if (customer.paymentMethod === "Efectivo" && customer.payWith) {
+      lines.push(`Abona con: ${customer.payWith}`);
+    }
+
     if (customer.comments) {
       lines.push("");
       lines.push("📝 Comentarios:");
@@ -73,10 +77,34 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
       alert("Agregá al menos un producto al pedido 🙂");
       return;
     }
+
+    // --- VALIDACIÓN DE CAMPOS ---
     if (!customer?.name) {
-      alert("Completá tu nombre antes de enviar el pedido.");
+      alert("Por favor completá tu nombre.");
       return;
     }
+
+    if (!customer?.phone) {
+      alert("Por favor completá tu teléfono de contacto.");
+      return;
+    }
+
+    const isDelivery = customer.deliveryMethod === "Delivery";
+
+    if (isDelivery) {
+      if (!customer.address) {
+        alert("Para Delivery, es necesario completar la Dirección.");
+        return;
+      }
+      if (!customer.address2) {
+        // El usuario pidió explícitamente validar "entre calles"
+        alert("Para Delivery, por favor indicá las Entre calles.");
+        return;
+      }
+    }
+
+    // Si es retiro, no validamos dirección
+    // ----------------------------
 
     const phoneRaw = clientConfig.whatsapp || "+5491162123307";
     const phone = phoneRaw.replace(/[^\d]/g, "");
