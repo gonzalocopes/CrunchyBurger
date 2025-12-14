@@ -215,7 +215,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 7000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_honey_1l.png",
   },
   {
     id: "artesanal-scottish",
@@ -223,7 +223,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 7000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_scottish_1l.png",
   },
   {
     id: "artesanal-ipa",
@@ -231,7 +231,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 8000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_ipa_1l.png",
   },
   {
     id: "artesanal-session-ipa",
@@ -239,7 +239,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 8000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_session_ipa_1l.png",
   },
   {
     id: "artesanal-porter",
@@ -247,7 +247,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 7000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_porter_1l.png",
   },
 
   // Tragos de Litro
