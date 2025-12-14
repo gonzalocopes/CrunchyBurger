@@ -17,7 +17,7 @@ function App() {
   const [customer, setCustomer] = useState({
     name: "",
     address: "",
-    address2:"",
+    address2: "",
     phone: "",
     deliveryMethod: "Delivery",
     paymentMethod: "Efectivo",
@@ -72,7 +72,7 @@ function App() {
     if (isClosed && clientConfig.horario?.enabled) {
       alert(
         clientConfig.horario.mensajeCerrado ||
-          "En este momento el local está cerrado."
+        "En este momento el local está cerrado."
       );
       return;
     }
@@ -89,20 +89,17 @@ function App() {
 
     const mainCategories = [
       "Hamburguesas",
-      "Papas",
       "Combos",
-      "Bebidas",
-      "Postres",
     ];
 
-      const shouldOpenUpsell =
-    !fromUpsell &&
-    (mainCategories.includes(product.category) || product.upsell === true);
+    const shouldOpenUpsell =
+      !fromUpsell &&
+      (mainCategories.includes(product.category) || product.upsell === true);
 
-  if (shouldOpenUpsell) {
-    setLastProduct(product);
-    setShowUpsell(true);
-  }
+    if (shouldOpenUpsell) {
+      setLastProduct(product);
+      setShowUpsell(true);
+    }
 
   };
 

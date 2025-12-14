@@ -8,7 +8,6 @@ export default function Menu({ onAddToCart, isClosed }) {
     { id: "papas", label: "Papas y Acompañamientos 🍟", products: papas },
     { id: "combos", label: "Combos y Baldes 🍗", products: combos },
     { id: "bebidas", label: "Bebidas 🥤", products: bebidas },
-    { id: "postres", label: "Postres 🍨", products: postres },
   ];
 
   // categoría abierta en MOBILE
@@ -16,6 +15,9 @@ export default function Menu({ onAddToCart, isClosed }) {
 
   // refs para hacer scroll suave a la categoría abierta
   const categoryRefs = useRef({});
+
+  // ref para la barra de categorías (sticky)
+  const stripRef = useRef(null);
 
   const handleToggleCategory = (id) => {
     setOpenCategory((prev) => {
@@ -27,16 +29,77 @@ export default function Menu({ onAddToCart, isClosed }) {
         // esperamos a que termine la animación de abrir/cerrar
         setTimeout(() => {
           const el = categoryRefs.current[next];
+          const stripEl = stripRef.current;
+
           if (el) {
-            // posición absoluta del contenedor en la página
-            const offset = el.offsetTop - 120; // ajustá 120 si querés más arriba/abajo
-            window.scrollTo({ top: offset, behavior: "smooth" });
+            // Altura aproximada del Navbar fijo (generalmente ~70px)
+            const navbarHeight = 70;
+            // Altura real de la barra de categorías sticky (si existe)
+            const stripHeight = stripEl ? stripEl.offsetHeight : 0;
+            // Un poco de "aire" extra
+            const extraPadding = 15;
+
+            // Calculamos el offset total que ocupan las barras superiores
+            const totalOffset = navbarHeight + stripHeight + extraPadding;
+
+            // Posición top del elemento menos todo lo que hay arriba
+            const topPosition = el.offsetTop - totalOffset;
+
+            window.scrollTo({ top: topPosition, behavior: "smooth" });
           }
         }, 350); // tiempo para que se acomode el layout
       }
 
       return next;
     });
+  };
+
+  // 🪄 Animación de volar al carrito
+  const triggerFlyAnimation = (e, imgUrl) => {
+    // Solo animar si existe el widget mobile (si no está, no animamos)
+    const cartWidget = document.getElementById("mobile-cart-widget");
+    if (!cartWidget) return;
+
+    // Coordenadas inicio (botón clickeado o el mismo evento)
+    const startRect = e.target.getBoundingClientRect();
+    const startX = startRect.left + startRect.width / 2;
+    const startY = startRect.top + startRect.height / 2;
+
+    // Coordenadas fin (widget carrito mobile)
+    const endRect = cartWidget.getBoundingClientRect();
+    const endX = endRect.left + endRect.width / 2;
+    const endY = endRect.top + endRect.height / 2;
+
+    // Crear elemento volador (clon visual)
+    const flyer = document.createElement("img");
+    flyer.src = imgUrl;
+    flyer.style.position = "fixed";
+    flyer.style.left = `${startX}px`;
+    flyer.style.top = `${startY}px`;
+    flyer.style.width = "50px";
+    flyer.style.height = "50px";
+    flyer.style.borderRadius = "50%";
+    flyer.style.objectFit = "cover";
+    flyer.style.zIndex = "9999";
+    flyer.style.pointerEvents = "none";
+    flyer.style.transition = "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)"; // Efecto "rápido al inicio, suave al final"
+    flyer.style.transform = "translate(-50%, -50%) scale(1)";
+    flyer.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
+
+    document.body.appendChild(flyer);
+
+    // Forzar reflow y activar la transición
+    requestAnimationFrame(() => {
+      flyer.style.left = `${endX}px`;
+      flyer.style.top = `${endY}px`;
+      flyer.style.transform = "translate(-50%, -50%) scale(0.2)"; // Se achica al llegar
+      flyer.style.opacity = "0.7";
+    });
+
+    // Limpieza al terminar
+    setTimeout(() => {
+      if (flyer.parentNode) flyer.parentNode.removeChild(flyer);
+    }, 600);
   };
 
   const renderProductCard = (item) => (
@@ -73,7 +136,10 @@ export default function Menu({ onAddToCart, isClosed }) {
               <button
                 className="btn btn-success btn-sm"
                 disabled={isClosed}
-                onClick={() => onAddToCart(item)}
+                onClick={(e) => {
+                  triggerFlyAnimation(e, item.img);
+                  onAddToCart(item);
+                }}
               >
                 {isClosed ? "Cerrado" : "Agregar"}
               </button>
@@ -90,7 +156,7 @@ export default function Menu({ onAddToCart, isClosed }) {
         <h2 className="mb-3 text-center">Menú</h2>
 
         {/* === LISTA DE CATEGORÍAS (ESTILO APP) – SOLO MOBILE === */}
-        <div className="d-md-none mb-3 menu-category-strip">
+        <div className="d-md-none mb-3 menu-category-strip" ref={stripRef}>
           {categories.map((cat) => {
             const isActive = openCategory === cat.id;
             return (
@@ -98,9 +164,8 @@ export default function Menu({ onAddToCart, isClosed }) {
                 key={cat.id}
                 type="button"
                 onClick={() => handleToggleCategory(cat.id)}
-                className={`menu-category-pill ${
-                  isActive ? "menu-category-pill-active" : ""
-                }`}
+                className={`menu-category-pill ${isActive ? "menu-category-pill-active" : ""
+                  }`}
               >
                 <span className="flex-grow-1 text-start">
                   <span className="d-block fw-semibold">{cat.label}</span>
@@ -138,9 +203,8 @@ export default function Menu({ onAddToCart, isClosed }) {
 
               {/* MOBILE: contenedor con animación de apertura/cierre */}
               <div
-                className={`d-md-none menu-category-collapse ${
-                  isOpenMobile ? "show" : ""
-                }`}
+                className={`d-md-none menu-category-collapse ${isOpenMobile ? "show" : ""
+                  }`}
               >
                 {cat.products.map((item) => renderProductCard(item))}
               </div>

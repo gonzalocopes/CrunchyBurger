@@ -91,7 +91,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     if (isClosed && clientConfig.horario?.enabled) {
       alert(
         clientConfig.horario.mensajeCerrado ||
-          "En este momento el local está cerrado."
+        "En este momento el local está cerrado."
       );
       return;
     }
@@ -146,6 +146,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
 
       {/* Barra fija inferior: mobile + tablet (se oculta en desktop por CSS) */}
       <button
+        id="mobile-cart-widget"
         type="button"
         onClick={handleClickMobile}
         disabled={isClosed}

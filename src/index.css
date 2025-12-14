@@ -18,13 +18,15 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  padding-top: 0px; /* El App.jsx maneja el padding top o el main */
+  padding-top: 0px;
+  /* El App.jsx maneja el padding top o el main */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -45,9 +47,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -58,9 +62,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
@@ -182,7 +188,7 @@ button:focus-visible {
 }
 
 .menu-category-collapse.show {
-  max-height: 1000px;
+  max-height: 10000px;
   opacity: 1;
 }
 
@@ -242,11 +248,11 @@ button:focus-visible {
 
 .menu-category-strip {
   gap: 0.75rem;
-  position: sticky;
-  top: 70px; /* Debajo del navbar fijo */
-  z-index: 1020;
+  /* position: sticky;  <-- SE SACA EL STICKY */
+  /* top: 70px; */
+  /* z-index: 1020; */
   padding-top: 10px;
-  background-color: #f8f9fa; /* Fondo para que no sea transparente al stickear */
+  background-color: transparent;
   margin-left: -1rem;
   margin-right: -1rem;
   padding-left: 1rem;
@@ -306,9 +312,12 @@ button:focus-visible {
 
 /* Scroll interno para la lista del Upsell */
 .upsell-scroll-area {
-  max-height: 300px;       /* altura fija cómoda en mobile */
-  overflow-y: auto;        /* habilita scroll */
-  padding-right: 4px;      /* espacio para evitar que tape el scroll */
+  max-height: 300px;
+  /* altura fija cómoda en mobile */
+  overflow-y: auto;
+  /* habilita scroll */
+  padding-right: 4px;
+  /* espacio para evitar que tape el scroll */
 }
 
 .upsell-scroll-area::-webkit-scrollbar {
@@ -332,9 +341,11 @@ button:focus-visible {
 /* AJUSTE SOLO PARA CELULAR */
 @media (max-width: 768px) {
   .carousel-item img {
-    height: 240px !important;     /* Altura reducida para mobile */
+    height: 240px !important;
+    /* Altura reducida para mobile */
     object-fit: cover !important;
-    object-position: center 60% !important; /* Enfocar más abajo */
+    object-position: center 60% !important;
+    /* Enfocar más abajo */
   }
 }
 
@@ -344,5 +355,5 @@ button:focus-visible {
   bottom: 0;
   width: 100%;
   height: 40%;
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
 }

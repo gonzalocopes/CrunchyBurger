@@ -3,7 +3,7 @@ export const clientConfig = {
   nombre: "Hamburguesería",          // Nombre del local
   tipo: "hamburgueseria",                     // pizzeria | hamburgueseria | heladeria | etc.
 
-  whatsapp: "+5491162123307",           // Teléfono del negocio (formato internacional)
+  whatsapp: "+5491136424020",           // Teléfono del negocio (formato internacional)
 
   logo: "/images/logoburga.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
 
@@ -18,10 +18,10 @@ export const clientConfig = {
   },
   // 🔔 NUEVO: configuración de horario
   //horario: {
-    //enabled: true, // si lo ponés en false, se desactiva el modo cerrado
-   // apertura: "14:00", // hora de apertura (24 hs)
-    //cierre: "23:30",   // hora de cierre  (24 hs)
-    //mensajeCerrado:
-      //"Ahora estamos cerrados. Nuestro horario: de 19:00 a 23:30 hs.",
+  //enabled: true, // si lo ponés en false, se desactiva el modo cerrado
+  // apertura: "14:00", // hora de apertura (24 hs)
+  //cierre: "23:30",   // hora de cierre  (24 hs)
+  //mensajeCerrado:
+  //"Ahora estamos cerrados. Nuestro horario: de 19:00 a 23:30 hs.",
   //},
 };
