@@ -168,7 +168,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
         </span>
         <span className="floating-wpp-chip">
           <span role="img" aria-label="carrito">
-            🧺
+            🛒
           </span>
           <span>
             {itemCount} · ${total}

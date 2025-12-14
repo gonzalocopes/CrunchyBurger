@@ -80,8 +80,8 @@ button:focus-visible {
   bottom: 0;
   z-index: 1040;
   padding: 0.75rem 1rem;
-  background-color: #d63347;
-  color: #fff;
+  background-color: #FFC107;
+  color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,7 +152,7 @@ button:focus-visible {
 }
 
 .menu-category-pill-active {
-  background-color: #ffeded;
+  background-color: #FFFBEB;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -238,7 +238,7 @@ button:focus-visible {
 }
 
 .menu-category-pill-active {
-  background-color: #ffe9e9 !important;
+  background-color: #FFFBEB !important;
 }
 
 /* ============================================================
@@ -282,15 +282,15 @@ button:focus-visible {
 
 /* Activa con gradiente */
 .menu-category-pill-active {
-  background: linear-gradient(135deg, #ff416c, #ff4b2b) !important;
-  box-shadow: 0 12px 32px rgba(248, 113, 113, 0.5) !important;
+  background: linear-gradient(135deg, #FFC107, #F59E0B) !important;
+  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4) !important;
   border-color: transparent !important;
 }
 
 /* Texto blanco cuando está activa */
 .menu-category-pill-active .fw-semibold,
 .menu-category-pill-active small {
-  color: #ffffff !important;
+  color: #000 !important;
 }
 
 /* Icono premium */
@@ -303,9 +303,9 @@ button:focus-visible {
 }
 
 .menu-category-pill-active .menu-cat-icon {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.7) !important;
-  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #000 !important;
 }
 
 
@@ -361,23 +361,30 @@ button:focus-visible {
 /* === Hero Caption Moderno (Glassmorphism) === */
 .hero-caption-glass {
   display: inline-block;
-  background: rgba(0, 0, 0, 0.15); /* Fondo muy transparente */
-  backdrop-filter: blur(12px);      /* Efecto blur de fondo (glass) */
+  background: rgba(0, 0, 0, 0.15);
+  /* Fondo muy transparente */
+  backdrop-filter: blur(12px);
+  /* Efecto blur de fondo (glass) */
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Borde sutil */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* Borde sutil */
   border-radius: 16px;
   padding: 1.5rem 2rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Sombra suave */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  /* Sombra suave */
   max-width: 90%;
   animation: fadeUp 0.8s ease-out;
 }
 
 .hero-title {
-  font-family: 'Anton', sans-serif; /* Fuente de impacto para el título */
-  font-weight: 400; /* Anton ya es bold por defecto */
-  font-size: 2.8rem; /* Un poco más grande para impactar */
+  font-family: 'Anton', sans-serif;
+  /* Fuente de impacto para el título */
+  font-weight: 400;
+  /* Anton ya es bold por defecto */
+  font-size: 2.8rem;
+  /* Un poco más grande para impactar */
   margin-bottom: 0.5rem;
-  text-shadow: 0 4px 6px rgba(0,0,0,0.4);
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   letter-spacing: 1px;
   color: #fff;
   text-transform: uppercase;
@@ -395,22 +402,30 @@ button:focus-visible {
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
   .hero-caption-glass {
     padding: 1rem 1.25rem;
-    background: rgba(0, 0, 0, 0.25); /* Un poco más oscuro en mobile para legibilidad */
+    background: rgba(0, 0, 0, 0.25);
+    /* Un poco más oscuro en mobile para legibilidad */
     border-radius: 12px;
     width: 95%;
   }
-  
+
   .hero-title {
     font-size: 1.4rem;
   }
-  
+
   .hero-subtitle {
     font-size: 0.9rem;
   }

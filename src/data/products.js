@@ -13,7 +13,7 @@ export const hamburguesas = [
     category: "Hamburguesas",
     description: "Pan de papa, Doble medallón de carne 120grs c/u, Provoleta, Cebolla Caramelizada, Cheddar liquido y Panceta. Incluye papas fritas.",
     price: 15500,
-    img: "/images/burgas/doblequeso.jpg",
+    img: "/images/burgas/mega-provo.png",
   },
   {
     id: "cheese-simple",
@@ -109,7 +109,7 @@ export const hamburguesas = [
     category: "Hamburguesas",
     description: "Salsa de mayonesa cremosa, Medallon de pollo, Doble cheddar, Tomate, Lechuga, Panceta. Incluye papas fritas.",
     price: 9990,
-    img: "/images/burgas/clasica.jpg",
+    img: "/images/burgas/chicken-crunchy.png",
   },
 ];
 
@@ -139,12 +139,12 @@ export const papas = [
     img: "/images/papas/papacompleta.png",
   },
   {
-    id: "papas-cheese-bacon",
+    id: "papas-crunchy-bacon",
     name: "Papas Crunchy Cheese Bacon",
     category: "Papas",
-    description: "Para compartir. Carne, Cheddar liquido, Panceta, Verdeo.",
+    description: "Para compartir. Papas fritas + doble carne smaheada + cheddar + panceta + cebollita de verdeo.",
     price: 14000,
-    img: "/images/papas/papacompleta.png",
+    img: "/images/papas/papas-crunchy.png",
   },
   {
     id: "cremato-crispy",
@@ -152,15 +152,15 @@ export const papas = [
     category: "Papas",
     description: "Para compartir. Cremato (Base de queso crema), Mayonesa, Trozos de Nuggets, Verdeo.",
     price: 14000,
-    img: "/images/papas/papacompleta.png",
+    img: "/images/papas/cremato-crispy.png",
   },
   {
-    id: "bondiola-bbq",
+    id: "papas-bondiola",
     name: "Papas Bondiola BBQ",
     category: "Papas",
-    description: "Para compartir. Bondiola Desmenuzada, Salsa BBQ, Cebolla Crispy, Verdeo y MOZZARELLA.",
+    description: "Para compartir. Papas fritas + bondiola desmechada + barbacoa + cebollita crispy + cheddar.",
     price: 14000,
-    img: "/images/papas/papacompleta.png",
+    img: "/images/papas/papas-bondiola-bbq.jpg",
   },
   {
     id: "nuggets-8",
@@ -179,7 +179,7 @@ export const combos = [
     category: "Combos",
     description: "4 Cheese Burger de 100grs c/u + 1 KILO DE PAPAS FRITAS.",
     price: 25990,
-    img: "/images/burgas/doblequeso.jpg",
+    img: "/images/burgas/mega-balde-clasico.png",
   },
   {
     id: "box-5-mini",
@@ -187,7 +187,7 @@ export const combos = [
     category: "Combos",
     description: "5 mini Cheese Burger + dip de cheddar + papas fritas.",
     price: 16500,
-    img: "/images/burgas/clasica.jpg",
+    img: "/images/burgas/box-5-mini.jpg",
   },
   {
     id: "box-10-mini",
@@ -195,7 +195,7 @@ export const combos = [
     category: "Combos",
     description: "10 mini Cheese Burger + dip de cheddar + papas fritas.",
     price: 27990,
-    img: "/images/burgas/clasica.jpg",
+    img: "/images/burgas/box-10-mini.jpg",
   },
 ];
 

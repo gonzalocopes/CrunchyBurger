@@ -8,9 +8,9 @@ export const clientConfig = {
   logo: "/images/logoburga.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
 
   colores: {
-    primario: "#f97316",   // naranja
+    primario: "#FFC107",   // Dorado Crunchy
     secundario: "#111827", // gris muy oscuro
-    textoClaro: "#ffffff",
+    textoClaro: "#333333", // Texto oscuro para contrastar con el amarillo si se usa de fondo
   },
 
   hero: {
@@ -28,7 +28,7 @@ export const clientConfig = {
         titulo: "Encontranos",
         subtitulo: "Av. Hipólito Yrigoyen 14687, Burzaco.",
       },
-      
+
     ],
   },
   // 🔔 NUEVO: configuración de horario
