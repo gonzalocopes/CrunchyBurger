@@ -164,6 +164,11 @@ function App() {
     }
   };
 
+  const handleEditItem = (item) => {
+    setLastProduct(item);
+    setShowUpsell(true);
+  };
+
   return (
     <div className="bg-body-tertiary min-vh-100">
       <Navbar cartCount={cartCount} />
@@ -196,6 +201,7 @@ function App() {
                 total={total}
                 onRemove={removeFromCart}
                 onChangeQty={changeQty}
+                onEdit={handleEditItem}
               />
               <CheckoutForm
                 customer={customer}
