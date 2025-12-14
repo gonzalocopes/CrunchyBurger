@@ -22,7 +22,7 @@ export default function CheckoutForm({ customer, onChange }) {
             name="name"
             value={customer.name}
             onChange={handleChange}
-            placeholder="Ej: Mariano"
+            placeholder="Ingresa tu nombre"
           />
         </div>
 
@@ -46,7 +46,7 @@ export default function CheckoutForm({ customer, onChange }) {
             name="address2"
             value={customer.address2}
             onChange={handleChange}
-            placeholder="Entre calle y calle"
+            placeholder="Entre calles"
           />
         </div>
 
@@ -99,7 +99,7 @@ export default function CheckoutForm({ customer, onChange }) {
             className="form-control"
             name="comments"
             rows="3"
-            placeholder="Ej: sin salsa, sin cebolla, etc..."
+            placeholder="Ej: Pago justo, sin cebolla, etc..."
             value={customer.comments}
             onChange={handleChange}
           ></textarea>

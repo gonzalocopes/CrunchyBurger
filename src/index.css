@@ -373,21 +373,25 @@ button:focus-visible {
 }
 
 .hero-title {
-  font-weight: 800;
-  font-size: 1.8rem;
+  font-family: 'Anton', sans-serif; /* Fuente de impacto para el título */
+  font-weight: 400; /* Anton ya es bold por defecto */
+  font-size: 2.8rem; /* Un poco más grande para impactar */
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  letter-spacing: -0.5px;
+  text-shadow: 0 4px 6px rgba(0,0,0,0.4);
+  letter-spacing: 1px;
   color: #fff;
   text-transform: uppercase;
+  line-height: 1;
 }
 
 .hero-subtitle {
-  font-size: 1rem;
-  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 0;
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.4;
+  letter-spacing: 0.5px;
 }
 
 @keyframes fadeUp {
@@ -410,4 +414,13 @@ button:focus-visible {
   .hero-subtitle {
     font-size: 0.9rem;
   }
+}
+
+/* === Marca en Navbar === */
+.brand-text {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
 }

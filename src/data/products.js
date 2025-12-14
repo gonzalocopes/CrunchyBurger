@@ -207,7 +207,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 7000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/cerveza_golden_1l.png",
   },
   {
     id: "artesanal-honey",

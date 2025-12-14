@@ -39,9 +39,9 @@ export default function Navbar({ cartCount }) {
             />
           )}
           <span
+            className="brand-text"
             style={{
               color: clientConfig.colores.textoClaro,
-              fontWeight: "bold",
             }}
           >
             {clientConfig.nombre}
