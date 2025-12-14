@@ -25,47 +25,20 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
     lines.push("");
     lines.push("🍔 Detalle del pedido:");
 
-    // Productos normales (sin sabores de pack ni extras)
+    // Productos con sus extras anidados
     cart.forEach((item) => {
-      // No mostramos los sabores de pack acá
-      if (isPackFlavor(item)) return;
+      // Linea principal del producto
+      // Si qty > 1, lo mostramos (aunque con IDs únicos será mayormente 1)
+      const qtyStr = item.qty > 1 ? `${item.qty}x ` : "";
+      lines.push(`- ${qtyStr}${item.name} ($${item.price})`);
 
-      // Tampoco mostramos los extras como producto común
-      if (item.category === "Extras") return;
-
-      lines.push(`- ${item.qty}x ${item.name} ($${item.price} c/u)`);
+      // Extras del producto
+      if (item.extras && item.extras.length > 0) {
+        item.extras.forEach((extra) => {
+          lines.push(`  + ${extra.name} ($${extra.price})`);
+        });
+      }
     });
-
-    // 🥟 Detalle de Media docena
-    if (mediaPack && mediaFlavors.length > 0) {
-      const detail = mediaFlavors
-        .map((item) => `${item.qty}x ${item.name}`)
-        .join(", ");
-
-      lines.push("");
-      lines.push(`🥟 Detalle ${mediaPack.name}:`);
-      lines.push(detail);
-    }
-
-    // 🥟 Detalle de Docena
-    if (docenaPack && docenaFlavors.length > 0) {
-      const detail = docenaFlavors
-        .map((item) => `${item.qty}x ${item.name}`)
-        .join(", ");
-
-      lines.push("");
-      lines.push(`🥟 Detalle ${docenaPack.name}:`);
-      lines.push(detail);
-    }
-
-    // ➕ Detalle de agregados para pizzas
-    if (pizzaExtras.length > 0) {
-      lines.push("");
-      lines.push("➕ Adicionales:");
-      pizzaExtras.forEach((item) => {
-        lines.push(`- ${item.qty}x ${item.name} ($${item.price} c/u)`);
-      });
-    }
 
     lines.push("");
     lines.push(`💰 Total: $${total}`);

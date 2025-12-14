@@ -1,10 +1,7 @@
-// src/components/Cart.jsx
 export default function Cart({ cart, total, onRemove, onChangeQty }) {
   return (
     <div className="card mb-4">
-      <div className="card-header bg-dark text-white">
-        Mi pedido
-      </div>
+      <div className="card-header bg-dark text-white">Mi pedido</div>
       <div className="card-body">
         {cart.length === 0 ? (
           <p className="text-muted mb-0">
@@ -15,39 +12,37 @@ export default function Cart({ cart, total, onRemove, onChangeQty }) {
             <ul className="list-group mb-3">
               {cart.map((item) => (
                 <li
-                  key={item.id}
-                  className="list-group-item d-flex justify-content-between align-items-center"
+                  key={item.uuid}
+                  className="list-group-item d-flex justify-content-between align-items-start"
                 >
-                  <div>
-                    <div className="fw-semibold">{item.name}</div>
-                    <small className="text-muted">
-                      ${item.price} c/u
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">{item.name}</div>
+                    <small className="text-muted d-block">
+                      ${item.price}
                     </small>
+                    
+                    {/* Renderizamos los extras si existen */}
+                    {item.extras && item.extras.length > 0 && (
+                      <ul className="list-unstyled mt-1 mb-0 ms-2 border-start ps-2">
+                        {item.extras.map((extra, idx) => (
+                          <li key={idx} className="small text-secondary">
+                            + {extra.name} (${extra.price})
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
+
                   <div className="d-flex align-items-center">
+                    {/* Cantidad siempre visible, pero sin botones +/- para simplificar la personalización única */}
+                    {item.qty > 1 && <span className="badge bg-secondary rounded-pill me-2">{item.qty}</span>}
+                    
                     <button
-                      className="btn btn-sm btn-outline-secondary me-2"
-                      onClick={() =>
-                        onChangeQty(item.id, item.qty - 1)
-                      }
-                      disabled={item.qty <= 1}
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => onRemove(item.uuid)}
+                      aria-label="Eliminar"
                     >
-                      -
-                    </button>
-                    <span>{item.qty}</span>
-                    <button
-                      className="btn btn-sm btn-outline-secondary ms-2"
-                      onClick={() =>
-                        onChangeQty(item.id, item.qty + 1)
-                      }
-                    >
-                      +
-                    </button>
-                    <button
-                      className="btn btn-sm btn-outline-danger ms-3"
-                      onClick={() => onRemove(item.id)}
-                    >
-                      x
+                      ✕
                     </button>
                   </div>
                 </li>

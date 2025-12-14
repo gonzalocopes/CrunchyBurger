@@ -77,14 +77,22 @@ function App() {
       return;
     }
 
+    // Generamos un ID único para CADA ítem que se agrega, 
+    // así podemos asignarle extras específicos a esa instancia.
+    const uniqueId = crypto.randomUUID();
+    const newItem = { ...product, uuid: uniqueId, qty: 1, extras: [] };
+
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-        );
-      }
-      return [...prev, { ...product, qty: 1 }];
+      // Si es una bebida o algo simple que NO lleva extras, podríamos agruparlo.
+      // Pero para simplificar y unificar la lógica de "pedido detallado", 
+      // vamos a tratar todo como ítem único o dejar que se agrupe solo si es idéntico 
+      // (pero el uuid lo hace único).
+      // 
+      // Excepción: Si querés que las bebidas se agrupen (ej: 2x Coca), 
+      // tendríamos que chequear si es "Customizable". 
+      // Por ahora, el requerimiento es separar para detalle claro. 
+      // Si el usuario pide 2 hamburguesas iguales, aparecerán como 2 ítems.
+      return [...prev, newItem];
     });
 
     const mainCategories = [
@@ -97,32 +105,55 @@ function App() {
       (mainCategories.includes(product.category) || product.upsell === true);
 
     if (shouldOpenUpsell) {
-      setLastProduct(product);
+      setLastProduct(newItem); // Guardamos la instancia con UUID
       setShowUpsell(true);
     }
-
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  const addExtraToItem = (parentUuid, extraProduct) => {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.uuid === parentUuid) {
+          // Agregamos el extra al array de extras de ESTE ítem
+          return { ...item, extras: [...(item.extras || []), extraProduct] };
+        }
+        return item;
+      })
+    );
   };
 
-  const changeQty = (id, newQty) => {
+  const removeFromCart = (uuid) => {
+    setCart((prev) => prev.filter((item) => item.uuid !== uuid));
+  };
+
+  // Cambio de cantidad: para ítems únicos, esto es raro (qty siempre 1).
+  // Si permitimos subir qty, duplicamos los extras? 
+  // Para simplificar: Qty será 1 por ítem único de comida.
+  // Bebidas podrían tener qty, pero si usas el mismo botón "Agregar", crea otra línea.
+  // Vamos a mantener la fn pero sabiendo que visualmente quizás eliminemos el selector de qty para burgers.
+  const changeQty = (uuid, newQty) => {
     if (newQty <= 0) return;
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, qty: newQty } : item
+        item.uuid === uuid ? { ...item, qty: newQty } : item
       )
     );
   };
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
+  const total = cart.reduce((sum, item) => {
+    const itemTotal = item.price * item.qty;
+    const extrasTotal = (item.extras || []).reduce((acc, ext) => acc + ext.price, 0);
+    // Asumimos que si qty > 1, los extras también se multiplican (ej: 2 hamburguesas iguales con extras iguales)
+    return sum + (itemTotal + extrasTotal * item.qty);
+  }, 0);
 
   const handleAddFromUpsell = (product) => {
-    addToCart(product, { fromUpsell: true });
+    if (lastProduct?.uuid) {
+      addExtraToItem(lastProduct.uuid, product);
+    } else {
+      // Fallback por si no hay padre (no debería pasar con la lógica nueva)
+      addToCart(product, { fromUpsell: true });
+    }
   };
 
   return (
