@@ -247,7 +247,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella de 1 litro.",
     price: 7000,
-    img: "/images/bebidas/cerveza_porter_1l.png",
+    img: "/images/bebidas/cerveza_porter_1l_v2.png",
   },
 
   // Tragos de Litro
