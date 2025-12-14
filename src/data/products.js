@@ -257,7 +257,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Trago de litro.",
     price: 8000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/trago_fernet_1l.png",
   },
   {
     id: "trago-gancia",
@@ -265,7 +265,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Trago de litro.",
     price: 6000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/trago_gancia_1l.png",
   },
   {
     id: "trago-sky-speed",
@@ -273,7 +273,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Trago de litro.",
     price: 9000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/trago_sky_speed_1l.png",
   },
   {
     id: "trago-sky-jugo",
@@ -281,7 +281,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Trago de litro.",
     price: 9000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/trago_sky_jugo_1l.png",
   },
 
   // Cervezas Industriales
@@ -291,7 +291,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Lata.",
     price: 2500,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/amstel_473.png",
   },
   {
     id: "heineken-710",
@@ -299,7 +299,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Latón.",
     price: 6000,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/heineken_710.png",
   },
 
   // Sin Alcohol
@@ -309,7 +309,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella personal.",
     price: 1100,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/agua_500.png",
   },
   {
     id: "agua-saborizada-500",
@@ -325,7 +325,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella personal.",
     price: 2200,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/coca_500.png",
   },
   {
     id: "sprite-500",
@@ -333,7 +333,7 @@ export const bebidas = [
     category: "Bebidas",
     description: "Botella personal.",
     price: 2200,
-    img: "/images/bebidas/cocalata.png",
+    img: "/images/bebidas/sprite_500.png",
   },
 ];
 
