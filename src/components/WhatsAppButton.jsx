@@ -27,22 +27,22 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
 
     // Productos con sus extras anidados
     cart.forEach((item) => {
-      // Linea principal del producto
+      // Linea principal del producto (en negrita)
       // Si qty > 1, lo mostramos (aunque con IDs únicos será mayormente 1)
       const qtyStr = item.qty > 1 ? `${item.qty}x ` : "";
-      lines.push(`- ${qtyStr}${item.name} ($${item.price})`);
+      lines.push(`*• ${qtyStr}${item.name}* ($${item.price})`);
 
       // Extras del producto
       if (item.extras && item.extras.length > 0) {
         item.extras.forEach((extra) => {
-          lines.push(`  + ${extra.name} ($${extra.price})`);
+          lines.push(`   + ${extra.name} ($${extra.price})`);
         });
       }
 
       // Exclusiones (Ingredientes quitados)
       if (item.exclusions && item.exclusions.length > 0) {
         item.exclusions.forEach((ex) => {
-          lines.push(`  - SIN ${ex}`);
+          lines.push(`   - SIN ${ex}`);
         });
       }
     });
@@ -168,7 +168,7 @@ export default function WhatsAppButton({ cart, total, customer, isClosed }) {
         </span>
         <span className="floating-wpp-chip">
           <span role="img" aria-label="carrito">
-            🧺
+            🛒
           </span>
           <span>
             {itemCount} · ${total}

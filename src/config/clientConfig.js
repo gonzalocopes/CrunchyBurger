@@ -1,34 +1,36 @@
 // src/config/clientConfig.js
 export const clientConfig = {
-  nombre: "Crunchy Burger",          // Nombre del local
+  nombre: "Tu Marca",          // Nombre del local
   tipo: "hamburgueseria",                     // pizzeria | hamburgueseria | heladeria | etc.
 
   whatsapp: "+5491136424020",           // Teléfono del negocio (formato internacional)
 
-  logo: "/images/logoburga.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
+  logo: "/images/tu-marca-logo.png",    // Ruta dentro de /public (ej: public/images/logo-pizzeria.png)
 
   colores: {
-    primario: "#f97316",   // naranja
+    primario: "#FFC107",   // Dorado Crunchy
     secundario: "#111827", // gris muy oscuro
-    textoClaro: "#ffffff",
+    textoClaro: "#333333", // Texto oscuro para contrastar con el amarillo si se usa de fondo
   },
 
   hero: {
-    fondo: "/images/fondoburga.jpg",   // Imagen de fondo (ponela en /public/images/)
+    fondo: "/images/burger-slider-1.png",   // Default fallback
     slides: [
       {
-        titulo: "CRUNCHY BURGER",
-        subtitulo: "Condenados al éxito desde la primera mordida.",
+        titulo: "TU MARCA",
+        subtitulo: "Calidad premium en cada bocado.",
+        image: "/images/burger-slider-1.png",
       },
       {
-        titulo: "Horarios",
-        subtitulo: "Miércoles a Domingo desde las 19hs.",
+        titulo: "Sabor Inigualable",
+        subtitulo: "Ingredientes frescos y seleccionados.",
+        image: "/images/burger-slider-2.png",
       },
       {
-        titulo: "Encontranos",
-        subtitulo: "Av. Hipólito Yrigoyen 14687, Burzaco.",
+        titulo: "Momentos Únicos",
+        subtitulo: "Compartí lo mejor con tus amigos.",
+        image: "/images/burger-slider-3.png",
       },
-      
     ],
   },
   // 🔔 NUEVO: configuración de horario

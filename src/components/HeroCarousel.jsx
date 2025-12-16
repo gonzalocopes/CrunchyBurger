@@ -1,29 +1,26 @@
-// src/components/HeroCarousel.jsx
 import { clientConfig } from "../config/clientConfig";
+import { useEffect } from "react";
+import { Carousel } from "bootstrap";
 
 export default function HeroCarousel() {
   const { hero, nombre } = clientConfig;
 
-  // Imagen de fondo: si no hay en config, usamos la de Pexels
-  const imageSrc =
-    hero?.fondo ||
-    "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg";
+  // SPA Fix: Initialize Carousel manually because DOMContentLoaded already fired
+  useEffect(() => {
+    const carouselElement = document.getElementById('heroCarousel');
+    if (carouselElement) {
+      const myCarousel = new Carousel(carouselElement, {
+        interval: 3000,
+        ride: 'carousel'
+      });
+      myCarousel.cycle();
+    }
+  }, []);
 
-  // Textos con fallback: si no hay en config, usamos los que ya tenías
-  const slide1Title = hero?.slides?.[0]?.titulo || `${nombre} 🍕`;
-  const slide1Subtitle =
-    hero?.slides?.[0]?.subtitulo ||
-    "Pedí tus hamburgesas favoritas y mandá el pedido por WhatsApp.";
-
-  const slide2Title = hero?.slides?.[1]?.titulo || "Hamburgesas que si llenan";
-  const slide2Subtitle =
-    hero?.slides?.[1]?.subtitulo ||
-    "Las mejores hamburgesas de zona sur.";
-
-  const slide3Title = hero?.slides?.[2]?.titulo || "Promos todos los días";
-  const slide3Subtitle =
-    hero?.slides?.[2]?.subtitulo || 
-    "2x1, combos individuales, familiares y mucho más.";
+  // 🛡️ Fallback safe slides if config is empty
+  if (!hero?.slides?.length) {
+    return null; // or return default static structure
+  }
 
   return (
     <section id="hero" className="bg-dark">
@@ -34,56 +31,35 @@ export default function HeroCarousel() {
           data-bs-ride="carousel"
         >
           <div className="carousel-inner">
-            {/* Slide 1 */}
-            <div className="carousel-item active">
-              <img
-                src={imageSrc}
-                className="d-block w-100"
-                alt="Slide 1"
-                style={{ maxHeight: "520px", objectFit: "cover" }}
-              />
-              <div className="carousel-caption d-block">
-                <div className="hero-caption-glass">
-                  <h2 className="hero-title">{slide1Title}</h2>
-                  <p className="hero-subtitle">{slide1Subtitle}</p>
-                </div>
-              </div>
-            </div>
+            {/* Slides map */}
+            {hero?.slides?.map((slide, index) => {
+              // 🖼️ Priority: Slide specific image > Global hero background > Default Pexels
+              const slideImage =
+                slide.image ||
+                hero?.fondo ||
+                "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg";
 
-            {/* Slide 2 */}
-            <div className="carousel-item">
-              <img
-                src={imageSrc}
-                className="d-block w-100"
-                alt="Slide 2"
-                style={{ maxHeight: "520px", objectFit: "cover" }}
-              />
-              <div className="carousel-caption d-block">
-                <div className="hero-caption-glass">
-                  <h2 className="hero-title">{slide2Title}</h2>
-                  <p className="hero-subtitle">{slide2Subtitle}</p>
+              return (
+                <div
+                  key={index}
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                >
+                  <img
+                    src={slideImage}
+                    className="d-block w-100"
+                    alt={`Slide ${index + 1}`}
+                    style={{ maxHeight: "520px", objectFit: "cover" }}
+                  />
+                  <div className="carousel-caption d-block">
+                    <div className="hero-caption-glass">
+                      <h2 className="hero-title">{slide.titulo}</h2>
+                      <p className="hero-subtitle">{slide.subtitulo}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Slide 3 */}
-            <div className="carousel-item">
-              <img
-                src={imageSrc}
-                className="d-block w-100"
-                alt="Slide 3"
-                style={{ maxHeight: "520px", objectFit: "cover" }}
-              />
-              <div className="carousel-caption d-block">
-                <div className="hero-caption-glass">
-                  <h2 className="hero-title">{slide3Title}</h2>
-                  <p className="hero-subtitle">{slide3Subtitle}</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
-
-          {/* Controles */}
           <button
             className="carousel-control-prev"
             type="button"

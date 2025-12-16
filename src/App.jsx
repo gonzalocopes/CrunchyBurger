@@ -1,5 +1,9 @@
 // src/App.jsx
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./index.css";
 import Navbar from "./components/Navbar";
 import HeroCarousel from "./components/HeroCarousel";
 import Menu from "./components/Menu";
@@ -164,8 +168,35 @@ function App() {
     }
   };
 
+  const handleEditItem = (item) => {
+    setLastProduct(item);
+    setShowUpsell(true);
+  };
+
+  // 🔔 FORZAR CAMBIO DE FAVICON (Solución "bruta" para ganarle al index.html)
+  useEffect(() => {
+    // 1. Buscamos el link existente
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      // Si no existe, lo creamos
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    // 2. Lo forzamos al nuevo
+    if (clientConfig.logo) {
+      link.href = clientConfig.logo;
+    }
+  }, []);
+
   return (
     <div className="bg-body-tertiary min-vh-100">
+      <Helmet>
+        <title>{clientConfig.nombre} | Menu Digital</title>
+        {clientConfig.logo && (
+          <link rel="icon" type="image/png" href={clientConfig.logo} sizes="16x16" />
+        )}
+      </Helmet>
       <Navbar cartCount={cartCount} />
 
       {clientConfig.horario?.enabled && isClosed && (
@@ -196,6 +227,7 @@ function App() {
                 total={total}
                 onRemove={removeFromCart}
                 onChangeQty={changeQty}
+                onEdit={handleEditItem}
               />
               <CheckoutForm
                 customer={customer}
@@ -218,7 +250,7 @@ function App() {
           © {new Date().getFullYear()}{" "}
           Desarrollado por{" "}
           <a
-            href="https://magozitsolutions.netlify.app/"
+            href="https://magozitsolutions.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-decoration-none text-info"

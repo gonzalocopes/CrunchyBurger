@@ -1,12 +1,13 @@
 // src/components/Menu.jsx
 import { useState, useRef } from "react";
-import { hamburguesas, papas, combos, bebidas, postres } from "../data/products";
+import { promos, hamburguesas, papas, combos, bebidas, postres } from "../data/products";
 
 export default function Menu({ onAddToCart, isClosed }) {
   const categories = [
     { id: "hamburguesas", label: "Hamburguesas 🍔", products: hamburguesas },
     { id: "papas", label: "Papas y Acompañamientos 🍟", products: papas },
     { id: "combos", label: "Combos y Baldes 🥡", products: combos },
+    { id: "promos", label: "Promos 🔥", products: promos },
     { id: "bebidas", label: "Bebidas 🥤", products: bebidas },
   ];
 
@@ -153,7 +154,7 @@ export default function Menu({ onAddToCart, isClosed }) {
   return (
     <section id="menu" className="py-4 bg-light">
       <div className="container-fluid px-3 px-lg-4">
-        <h2 className="mb-3 text-center">Menú</h2>
+        <h2 className="mb-3 text-center user-select-none text-dark">Menú</h2>
 
         {/* === LISTA DE CATEGORÍAS (ESTILO APP) – SOLO MOBILE === */}
         <div className="d-md-none mb-3 menu-category-strip" ref={stripRef}>
@@ -194,7 +195,7 @@ export default function Menu({ onAddToCart, isClosed }) {
             >
               {/* Título de categoría (solo desktop) */}
               <div className="d-none d-md-flex align-items-baseline mb-2">
-                <h4 className="me-2 mb-0">{cat.label}</h4>
+                <h4 className="me-2 mb-0 text-dark">{cat.label}</h4>
                 <small className="text-muted">
                   {cat.products.length} producto
                   {cat.products.length !== 1 ? "s" : ""}

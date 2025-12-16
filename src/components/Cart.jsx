@@ -1,4 +1,4 @@
-export default function Cart({ cart, total, onRemove, onChangeQty }) {
+export default function Cart({ cart, total, onRemove, onChangeQty, onEdit }) {
   return (
     <div className="card mb-4">
       <div className="card-header bg-dark text-white">Mi pedido</div>
@@ -29,7 +29,7 @@ export default function Cart({ cart, total, onRemove, onChangeQty }) {
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Renderizamos los extras si existen */}
                     {item.extras && item.extras.length > 0 && (
                       <ul className="list-unstyled mt-1 mb-0 ms-2 border-start ps-2">
@@ -43,9 +43,20 @@ export default function Cart({ cart, total, onRemove, onChangeQty }) {
                   </div>
 
                   <div className="d-flex align-items-center">
+                    {/* Botón EDITAR (Solo hamburguesas) */}
+                    {item.category === "Hamburguesas" && (
+                      <button
+                        className="btn btn-sm btn-outline-warning me-2"
+                        onClick={() => onEdit && onEdit(item)}
+                        title="Editar ingredientes"
+                      >
+                        ✏️
+                      </button>
+                    )}
+
                     {/* Cantidad siempre visible, pero sin botones +/- para simplificar la personalización única */}
                     {item.qty > 1 && <span className="badge bg-secondary rounded-pill me-2">{item.qty}</span>}
-                    
+
                     <button
                       className="btn btn-sm btn-outline-danger"
                       onClick={() => onRemove(item.uuid)}
