@@ -188,7 +188,6 @@ function App() {
       link.href = clientConfig.logo;
     }
   }, []);
-
   return (
     <div className="bg-body-tertiary min-vh-100">
       <Helmet>

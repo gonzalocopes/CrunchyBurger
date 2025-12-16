@@ -32,6 +32,7 @@ export const clientConfig = {
         image: "/images/burger-slider-3.png",
       },
     ],
+    ],
   },
   // 🔔 NUEVO: configuración de horario
   //horario: {
